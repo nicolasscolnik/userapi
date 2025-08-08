@@ -1,41 +1,21 @@
-package com.example.userapi.model;
+package com.example.userapi.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-@Entity
-@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Schema(description = "ID autogenerado del usuario", example = "1")
-    private Long id;
+public class UserUpdateDto {
 
     @NotBlank(message = "El nombre no puede estar vacío")
     @Size(min = 2, max = 50, message = "El nombre debe tener entre 2 y 50 caracteres")
-    @Schema(description = "Nombre del usuario", example = "Juan Pérez")
     private String name;
 
     @NotBlank(message = "El email es obligatorio")
     @Email(message = "El email debe ser válido")
-    @Schema(description = "Email del usuario", example = "juan@mail.com")
     private String email;
 
-    public User() {}
-
-    public Long getId() { return id; }
-
-    public void setId(Long id) { this.id = id; }
-
     public String getName() { return name; }
-
     public void setName(String name) { this.name = name; }
-
     public String getEmail() { return email; }
-
     public void setEmail(String email) { this.email = email; }
 }
